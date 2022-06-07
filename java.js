@@ -1,3 +1,5 @@
+"use strict";
+
 let myLibrary = [];
 
 function Book(title, author, pages, score, readOrNot) {
@@ -46,11 +48,27 @@ const searchPrompt = document.querySelector('#search-prompt');
 
 const searchButton = document.querySelector('#search');
 
-function onLoadFillTable(firstInArray) {
-    bookNumber.textContent = 1;
-    title.textContent = myLibrary[0].title;
-    author.textContent = myLibrary[0].author;
-    pages.textContent = myLibrary[0].pages;
-    score.textContent = myLibrary[0].score;
-    readOrNot.textContent = myLibrary[0].readOrNot;
-}
+let number = 0;
+function fillTable() {
+    bookNumber.textContent = number + 1;
+    title.textContent = myLibrary[number].title;
+    author.textContent = myLibrary[number].author;
+    pages.textContent = myLibrary[number].pages;
+    score.textContent = myLibrary[number].score;
+    readOrNot.textContent = myLibrary[number].readOrNot;
+};
+
+nextButton.addEventListener('click', () =>{
+    number += 1;
+    fillTable()
+});
+
+backButton.addEventListener('click', () =>{
+    number -= 1;
+    fillTable()
+});
+
+readButton.addEventListener('click', () => {
+    if(readOrNot.textContent === 'read') readOrNot.textContent = 'not read... YET!';
+    else readOrNot.textContent = 'read';
+});
