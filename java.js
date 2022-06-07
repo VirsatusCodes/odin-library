@@ -95,6 +95,7 @@ readButton.addEventListener('click', () => {
 removeButton.addEventListener('click', () =>{
     if(myLibrary.length > 1){
         myLibrary.splice(number, 1);
+        number= myLibrary.length -1;
         fillTable();    
     } else if (myLibrary.length === 1) {
         myLibrary.splice(number, 1);
