@@ -8,7 +8,7 @@
     <script src="java.js" defer></script>
     <title>Document</title>
 </head>
-<body>
+<body onload="onLoadFillTable()">
     <div class="container flex">
         <p class="flex">Welcome! this is simply a little library where you can 
             keep track of your books and what youve read and what you
@@ -18,8 +18,8 @@
         <div class="table flex">
             <table>
                 <tr>
-                    <th>Book #</th>
-                    <td id="title"></th>
+                    <th>Library Book #</th>
+                    <td id="book-number"></th>
                 </tr>
                 <tr>
                     <th>Title</th>
@@ -39,7 +39,7 @@
                 </tr>
                 <tr>
                     <th>Read?</th>
-                    <td id="read"></th>
+                    <td id="readOrNot"></th>
                 </tr>
             </table>
         </div>
@@ -52,9 +52,9 @@
             <button id="next">Next</button>
         </div>
         <div class="search flex">
-            <label for="search">Search for one of your books!</label>
-            <input type="text" name="user-search" id="search">
-            <button>Search</button>
+            <label for="search">Search for one of your books! based on exactly what you put for title w/spacing</label>
+            <input type="text" name="user-search" id="search-prompt" placeholder="ex. eragon">
+            <button id="search">Search</button>
         </div>
     </div>
 </body>
