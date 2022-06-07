@@ -58,17 +58,46 @@ function fillTable() {
     readOrNot.textContent = myLibrary[number].readOrNot;
 };
 
+function checkIfEmpty(){
+/* if i were launching i would have this test if the user has a library
+yet and if they dont fill it with the ifEmpty info and if they do
+then fill it with the info they do have */
+};
+
+function ifEmpty(){
+    bookNumber.textContent = 'the library is...empty';
+    title.textContent = 'the library is...empty';
+    author.textContent = 'the library is...empty';
+    pages.textContent = 'the library is...empty';
+    score.textContent = 'the library is...empty';
+    readOrNot.textContent = 'you NEED to fix this : (';
+};
+
 nextButton.addEventListener('click', () =>{
-    number += 1;
-    fillTable()
+    if (number < myLibrary.length - 1) {
+        number += 1;
+        fillTable();
+    }else return;
 });
 
 backButton.addEventListener('click', () =>{
-    number -= 1;
-    fillTable()
+    if (number > 0) {
+        number -= 1;
+        fillTable();
+    }else return;
 });
 
 readButton.addEventListener('click', () => {
     if(readOrNot.textContent === 'read') readOrNot.textContent = 'not read... YET!';
     else readOrNot.textContent = 'read';
+});
+
+removeButton.addEventListener('click', () =>{
+    if(myLibrary.length > 1){
+        myLibrary.splice(number, 1);
+        fillTable();    
+    } else if (myLibrary.length === 1) {
+        myLibrary.splice(number, 1);
+        ifEmpty();
+    } else return;
 });
