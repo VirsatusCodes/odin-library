@@ -1,3 +1,39 @@
 *{
-    background-color: blue;
+    /* border: 3px solid grey; */
 }
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: aquamarine;
+    min-height: 100vh;
+}
+
+.flex{
+    display: flex;
+    justify-content: center;
+}
+
+
+.container{
+    gap: 50px;
+}
+
+.container, .search{
+    flex-flow: column;
+}
+
+.table, th{
+    border: 3px solid black;
+}
+
+td{
+    border-bottom: 3px solid black;
+}
+
+.search{
+    align-items: center;
+    
+}
+
