@@ -16,11 +16,7 @@ function addBookToLibrary(book) {
 
 const eragon = new Book('Eragon', 'Christopher Paolini', 544, 5, 'read' );
 
-const eldest = new Book('Eldest', 'Christopher Paolini', 694, 5, 'read' );
-
 addBookToLibrary(eragon);
-
-addBookToLibrary(eldest);
 
 const bookNumber = document.querySelector('#book-number');
 
@@ -34,15 +30,11 @@ const score = document.querySelector('#score');
 
 const readOrNot = document.querySelector('#readOrNot');
 
-const backButton = document.querySelector('#back');
-
 const addButton = document.querySelector('#add');
 
 const readButton = document.querySelector('#read');
 
 const removeButton = document.querySelector('#remove');
-
-const nextButton = document.querySelector('#next');
 
 const searchPrompt = document.querySelector('#search-prompt');
 
@@ -57,6 +49,8 @@ function fillTable() {
     score.textContent = myLibrary[number].score;
     readOrNot.textContent = myLibrary[number].readOrNot;
 };
+
+
 
 function checkIfEmpty(){
 /* if i were launching i would have this test if the user has a library
@@ -73,19 +67,11 @@ function ifEmpty(){
     readOrNot.textContent = 'you NEED to fix this : (';
 };
 
-nextButton.addEventListener('click', () =>{
-    if (number < myLibrary.length - 1) {
-        number += 1;
-        fillTable();
-    }else return;
-});
-
-backButton.addEventListener('click', () =>{
-    if (number > 0) {
-        number -= 1;
-        fillTable();
-    }else return;
-});
+addButton.addEventListener('click', () => {
+    const newBook = new Book (prompt());
+    addBookToLibrary(newBook);
+    fillTable();
+})
 
 readButton.addEventListener('click', () => {
     if(readOrNot.textContent === 'read') readOrNot.textContent = 'not read... YET!';
@@ -102,3 +88,24 @@ removeButton.addEventListener('click', () =>{
         ifEmpty();
     } else return;
 });
+
+
+const theTable = document.querySelector('table');
+const tableRow = document.createElement('tr');
+const tableData = document.createElement('td');
+const newTableRow = document.querySelector('table:last-child');
+const newtable = theTable.lastChild;
+const anotherTable = document.querySelector('tbody');
+const selected = anotherTable.lastChild;
+
+anotherTable.appendChild(tableRow);
+anotherTable.lastChild.appendChild(tableData);
+tableData.textContent='test';
+const tableData2 = document.createElement('td');
+tableData2.textContent= 'other test';
+anotherTable.lastChild.appendChild(tableData2);
+
+function showBook() {
+    const tableRow = document.createElement('tr');
+    const tableData = document.createElement('td');
+}

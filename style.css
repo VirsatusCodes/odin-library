@@ -20,7 +20,7 @@ body{
     gap: 50px;
 }
 
-.container, .search{
+.container{
     flex-flow: column;
 }
 
@@ -32,8 +32,8 @@ td{
     border-bottom: 3px solid black;
 }
 
-.search{
-    align-items: center;
-    
+td{
+    border-right: 20px solid rgba(0, 0, 0, 0);
 }
+/* cool accidental effect im gunna keep it */
 

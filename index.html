@@ -16,45 +16,30 @@
         </p>
 
         <div class="table flex">
-            <table>
+            <table class="test">
                 <tr>
                     <th>Library Book #</th>
-                    <td id="book-number"></th>
-                </tr>
-                <tr>
                     <th>Title</th>
-                    <td id="title"></th>
-                </tr>
-                <tr>
                     <th>Author</th>
-                    <td id="author"></th>
-                </tr>
-                <tr>
                     <th>Pages</th>
-                    <td id="pages"></th>
-                </tr>
-                <tr>
                     <th>Score</th>
-                    <td id="score"></th>
+                    <th>Read?</th>
                 </tr>
                 <tr>
-                    <th>Read?</th>
+                    <td id="book-number" data-set="car"></th>
+                    <td id="title"></th>
+                    <td id="author"></th>
+                    <td id="pages"></th>
+                    <td id="score"></th>
                     <td id="readOrNot"></th>
                 </tr>
             </table>
         </div>
         <div class="buttons flex">
-            <button id="back">Back</button>
             <button id="add">Add Book</button>
             <button id="read">Read or Not?</button>
             <button id="remove">Remove Book</button>
             <!-- put up an "are you sure?" -->
-            <button id="next">Next</button>
-        </div>
-        <div class="search flex">
-            <label for="search">Search for one of your books! based on exactly what you put for title w/spacing</label>
-            <input type="text" name="user-search" id="search-prompt" placeholder="ex. eragon">
-            <button id="search">Search</button>
         </div>
     </div>
 </body>
