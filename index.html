@@ -18,7 +18,6 @@
         <div class="table flex">
             <table class="test">
                 <tr>
-                    <th>Library Book #</th>
                     <th>Title</th>
                     <th>Author</th>
                     <th>Pages</th>
@@ -26,12 +25,11 @@
                     <th>Read?</th>
                 </tr>
                 <tr>
-                    <td id="book-number" data-set="car"></th>
-                    <td id="title"></th>
+<!--                     <td id="title"></th>
                     <td id="author"></th>
                     <td id="pages"></th>
                     <td id="score"></th>
-                    <td id="readOrNot"></th>
+                    <td id="readOrNot"></th> -->
                 </tr>
             </table>
         </div>
@@ -40,6 +38,26 @@
             <button id="read">Read or Not?</button>
             <button id="remove">Remove Book</button>
             <!-- put up an "are you sure?" -->
+        </div>
+        <div class="book-creator">
+            <form>
+
+                <label for="title">Title</label>
+                <input type="text" name="title-of-book" id="title">
+                
+                <label for="author">Author</label>
+                <input type="text" name="author-of-book" id="author">
+                
+                <label for="pages">Pages</label>
+                <input type="number" name="pages-in-book" id="pages" max="9999" placeholder="less than 10000">
+                
+                <label for="score">Score</label>
+                <input type="number" name="score-out-of-five" id="score" max="5" placeholder="0-5">
+                
+                <label for="readOrNot">Have you read it?</label>
+                <input type="text" name="read-or-not" id="read-or-not" placeholder="yes or no">
+            </form>
+            <button id="book-create"> create</button>
         </div>
     </div>
 </body>
