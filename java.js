@@ -4,6 +4,18 @@
 let myLibrary = [];
 let indexNumber = 0
 let recentBook=0
+let deleteButtons = document.getElementsByClassName('remove');
+let tableRowSelector = document.getElementsByClassName('table-row');
+let lastTableRow = 0;
+let tick = 0
+
+const createButton = document.querySelector('#book-create');
+const title = document.querySelector('#title');
+const author = document.querySelector('#author');
+const pages = document.querySelector('#pages');
+const score = document.querySelector('#score');
+const readOrNot = document.querySelector('#read-or-not');
+const tableRows = document.querySelector('tbody');
 
 function Book(title, author, pages, score, readOrNot) {
 this.title=title;
@@ -13,7 +25,6 @@ this.score=score;
 this.readOrNot=readOrNot;
 
 recentBook=this;
-
 };
 
 function addBookToLibrary(book) {
@@ -21,46 +32,9 @@ function addBookToLibrary(book) {
 };
 
 const eragon = new Book('Eragon', 'Christopher Paolini', 544, 5, 'read' );
-
-const farasd = new Book('fasrd', 'Christopher Paolini', 544, 5, 'read' );
-
-const fklnasdka = new Book ('dljknasla', 'ahsnidakda');
-
+const eldest = new Book('Eldest', 'Christopher Paolini', 512, 5, 'read' );
 addBookToLibrary(eragon);
-
-addBookToLibrary(farasd);
-
-addBookToLibrary(fklnasdka);
-
-/* button.addeventlistener(blah blah() {
-    bring up prompt
-})
-
-button in prompt gets data for book then 
-you create the book and 
- */
-const createButton = document.querySelector('#book-create');
-
-const title = document.querySelector('#title');
-
-const author = document.querySelector('#author');
-
-const pages = document.querySelector('#pages');
-
-const score = document.querySelector('#score');
-
-const readOrNot = document.querySelector('#read-or-not');
-
-
-
-createButton.addEventListener('click', () =>{ 
-    if(title.value != '' && author.value != '' && pages.value < 10000) {
-    new Book(title.value, author.value, pages.value, score.value, readOrNot.value);
-    addBookToLibrary(recentBook);
-    resetValues();
-    singleFillInRow();
-    } else return;
-});
+addBookToLibrary(eldest);
 
 function resetValues(){
     title.value='';
@@ -70,10 +44,6 @@ function resetValues(){
     readOrNot.value='';
 }
 
-const tableRows = document.querySelector('tbody');
-
-let lastTableRow = 0;
-let tick = 0
 function makeRow() {
     const tableRow = document.createElement('tr');
     tableRow.classList = 'table-row'
@@ -98,16 +68,14 @@ function makeRow() {
 
     tick++;
     lastTableRow = tableRows.lastChild;
-    deleteButtons = document.querySelectorAll('.remove');
 };
-let cars = document.getElementsByClassName('table-row');
 
 function emptyTable() {
-    for(let i = 0; i < cars.length; i++){
-    cars[i].remove();
+    for(let i = 0; i < tableRowSelector.length; i++){
+    tableRowSelector[i].remove();
     console.log(i);
     };
-    if(cars.length === 1 )cars[0].remove();
+    if(tableRowSelector.length === 1 )tableRowSelector[0].remove();
     else return;
 };
 
@@ -133,23 +101,22 @@ function singleFillInRow() {
 
 }
 
-let deleteButtons = document.getElementsByClassName('remove');
-
 function assignbuttons() {
     for(let i = 0; i < deleteButtons.length; i++){
         deleteButtons[i].addEventListener('click', (function (e) {
             myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1)
+            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber)
         }));   
     };
 };
 
-/* function superTest(){
-    deleteButtons.addEventListener('click', (function (e) {
-        myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1);
-    }));
-};
-
-
-deleteButtons.forEach(superTest()) */
-    
+createButton.addEventListener('click', () =>{ 
+    if(title.value != '' && author.value != '' && pages.value < 10000) {
+    new Book(title.value, author.value, pages.value, score.value, readOrNot.value);
+    addBookToLibrary(recentBook);
+    resetValues();
+    singleFillInRow();
+    assignbuttons();
+    } else return;
+});
 
