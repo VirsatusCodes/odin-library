@@ -70,13 +70,25 @@ function makeRow() {
     lastTableRow = tableRows.lastChild;
 };
 
+let placeholderValue= 0
+
 function emptyTable() {
-    for(let i = 0; i < tableRowSelector.length; i++){
-    tableRowSelector[i].remove();
+    for(let i = tableRowSelector.length - 1; i > - 1; i--){
     console.log(i);
+    tableRowSelector[i].remove();
     };
-    if(tableRowSelector.length === 1 )tableRowSelector[0].remove();
-    else return;
+};
+
+function onLoadFillTable() {
+    for(let i = 0; i < myLibrary.length ; i++){
+        makeRow();
+        lastTableRow.childNodes[0].textContent=myLibrary[i].title;
+        lastTableRow.childNodes[1].textContent=myLibrary[i].author;
+        lastTableRow.childNodes[2].textContent=myLibrary[i].pages;
+        lastTableRow.childNodes[3].textContent=myLibrary[i].score;
+        lastTableRow.childNodes[4].textContent=myLibrary[i].readOrNot; 
+    };
+     assignbuttons();
 };
 
 function fillTable() {
@@ -88,7 +100,6 @@ function fillTable() {
         lastTableRow.childNodes[3].textContent=myLibrary[i].score;
         lastTableRow.childNodes[4].textContent=myLibrary[i].readOrNot; 
     };
-    assignbuttons(); /* this has to be called everytime fillTable is to properly update */
 };
 
 function singleFillInRow() {
@@ -104,8 +115,10 @@ function singleFillInRow() {
 function assignbuttons() {
     for(let i = 0; i < deleteButtons.length; i++){
         deleteButtons[i].addEventListener('click', (function (e) {
-            myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1)
-            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber)
+            myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1);
+            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber);
+            emptyTable();
+            fillTable();
         }));   
     };
 };
@@ -114,8 +127,12 @@ createButton.addEventListener('click', () =>{
     if(title.value != '' && author.value != '' && pages.value < 10000) {
     new Book(title.value, author.value, pages.value, score.value, readOrNot.value);
     addBookToLibrary(recentBook);
+    tick = 0;
+    /* might need to change this solution to tick changing values 
+    every reload of the table when i save data between use states */
     resetValues();
-    singleFillInRow();
+    emptyTable();
+    fillTable();
     assignbuttons();
     } else return;
 });
