@@ -10,7 +10,8 @@ let tableRowSelector = document.getElementsByClassName('table-row');
 let lastTableRow = 0;
 let tick = 0;
 
-
+const bookCreator = document.querySelector('.book-creator');
+const addButton = document.querySelector('#add');
 const createButton = document.querySelector('#book-create');
 const title = document.querySelector('#title');
 const author = document.querySelector('#author');
@@ -75,7 +76,7 @@ function makeRow() {
 
 function emptyTable() {
     for(let i = tableRowSelector.length - 1; i > - 1; i--){
-    console.log(i);
+    /* console.log(i); */
     tableRowSelector[i].remove();
     };
 };
@@ -111,7 +112,7 @@ function assignButtonsDelete() {
     for(let i = 0; i < deleteButtons.length; i++){
         deleteButtons[i].addEventListener('click', (function (e) {
             myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1);
-            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber);
+            /*   */
             emptyTable();
             fillTable();
         }));   
@@ -125,7 +126,7 @@ function assignButtonsRead(){
                 myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'yes'
             }
             else  myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'no';
-            console.log(e.target.parentElement.childNodes[6].dataset.indexNumber);
+            /* console.log(e.target.parentElement.childNodes[6].dataset.indexNumber); */
             emptyTable();
             fillTable();
         }));   
@@ -142,6 +143,12 @@ createButton.addEventListener('click', () =>{
     resetValues();
     emptyTable();
     fillTable();
+    bookCreator.style.opacity = '0';
+    bookCreator.style.zIndex = '-1';
     } else return;
 });
 
+addButton.addEventListener('click', () => {
+bookCreator.style.opacity = '1';
+bookCreator.style.zIndex = '1';
+});
