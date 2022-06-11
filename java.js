@@ -33,8 +33,8 @@ function addBookToLibrary(book) {
  myLibrary.push(book);
 };
 
-const eragon = new Book('Eragon', 'Christopher Paolini', 544, 5, 'read' );
-const eldest = new Book('Eldest', 'Christopher Paolini', 512, 5, 'read' );
+const eragon = new Book('Eragon', 'Christopher Paolini', 544, 5, 'yes' );
+const eldest = new Book('Eldest', 'Christopher Paolini', 512, 5, 'yes' );
 addBookToLibrary(eragon);
 addBookToLibrary(eldest);
 
@@ -121,17 +121,16 @@ function assignButtonsDelete() {
 function assignButtonsRead(){
     for(let i = 0; i < readButtons.length; i++){
         readButtons[i].addEventListener('click', (function (e) {
-            myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'not read';
+            if( myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot === 'no'){
+                myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'yes'
+            }
+            else  myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'no';
             console.log(e.target.parentElement.childNodes[6].dataset.indexNumber);
             emptyTable();
             fillTable();
         }));   
     };
 };
-
-function readOrNotChanger() {
-
-}
 
 createButton.addEventListener('click', () =>{ 
     if(title.value != '' && author.value != '' && pages.value < 10000) {
