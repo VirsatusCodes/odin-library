@@ -5,9 +5,11 @@ let myLibrary = [];
 let indexNumber = 0
 let recentBook=0
 let deleteButtons = document.getElementsByClassName('remove');
+let readButtons = document.getElementsByClassName('read?');
 let tableRowSelector = document.getElementsByClassName('table-row');
 let lastTableRow = 0;
-let tick = 0
+let tick = 0;
+
 
 const createButton = document.querySelector('#book-create');
 const title = document.querySelector('#title');
@@ -63,7 +65,7 @@ function makeRow() {
     const readButton = document.createElement('button');
     readButton.textContent = 'read?';
     readButton.classList = 'read?';
-    deleteButton.dataset.indexNumber= tick;
+    readButton.dataset.indexNumber= tick;
     tableRows.lastChild.appendChild(readButton);
 
     tick++;
@@ -88,7 +90,8 @@ function onLoadFillTable() {
         lastTableRow.childNodes[3].textContent=myLibrary[i].score;
         lastTableRow.childNodes[4].textContent=myLibrary[i].readOrNot; 
     };
-     assignbuttons();
+     assignButtonsDelete();
+     assignButtonsRead();
 };
 
 function fillTable() {
@@ -100,19 +103,11 @@ function fillTable() {
         lastTableRow.childNodes[3].textContent=myLibrary[i].score;
         lastTableRow.childNodes[4].textContent=myLibrary[i].readOrNot; 
     };
+    assignButtonsDelete();
+    assignButtonsRead();
 };
 
-function singleFillInRow() {
-    makeRow();
-    lastTableRow.childNodes[0].textContent=myLibrary[myLibrary.length-1].title;
-    lastTableRow.childNodes[1].textContent=myLibrary[myLibrary.length-1].author;
-    lastTableRow.childNodes[2].textContent=myLibrary[myLibrary.length-1].pages;
-    lastTableRow.childNodes[3].textContent=myLibrary[myLibrary.length-1].score;
-    lastTableRow.childNodes[4].textContent=myLibrary[myLibrary.length-1].readOrNot; 
-
-}
-
-function assignbuttons() {
+function assignButtonsDelete() {
     for(let i = 0; i < deleteButtons.length; i++){
         deleteButtons[i].addEventListener('click', (function (e) {
             myLibrary.splice(e.target.parentElement.childNodes[5].dataset.indexNumber, 1);
@@ -122,6 +117,25 @@ function assignbuttons() {
         }));   
     };
 };
+/* i just realized if i am re populating the table with the array everytime i 
+create or delete a book item then i can do as i did accidentally below and 
+assign the buttons to correspond to the right book using a loop, BIG oof 
+though i consider what i did above with assignButtonsDelete to be a more targeted
+and probably better approach */
+function assignButtonsRead(){
+    for(let i = 0; i < readButtons.length; i++){
+        readButtons[i].addEventListener('click', (function (e) {
+            myLibrary[i].readOrNot = 'not read';
+            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber);
+            emptyTable();
+            fillTable();
+        }));   
+    };
+};
+
+function readOrNotChanger() {
+
+}
 
 createButton.addEventListener('click', () =>{ 
     if(title.value != '' && author.value != '' && pages.value < 10000) {
@@ -133,7 +147,6 @@ createButton.addEventListener('click', () =>{
     resetValues();
     emptyTable();
     fillTable();
-    assignbuttons();
     } else return;
 });
 
