@@ -72,7 +72,6 @@ function makeRow() {
     lastTableRow = tableRows.lastChild;
 };
 
-let placeholderValue= 0
 
 function emptyTable() {
     for(let i = tableRowSelector.length - 1; i > - 1; i--){
@@ -95,6 +94,7 @@ function onLoadFillTable() {
 };
 
 function fillTable() {
+    tick = 0;
     for(let i = 0; i < myLibrary.length ; i++){
         makeRow();
         lastTableRow.childNodes[0].textContent=myLibrary[i].title;
@@ -117,16 +117,12 @@ function assignButtonsDelete() {
         }));   
     };
 };
-/* i just realized if i am re populating the table with the array everytime i 
-create or delete a book item then i can do as i did accidentally below and 
-assign the buttons to correspond to the right book using a loop, BIG oof 
-though i consider what i did above with assignButtonsDelete to be a more targeted
-and probably better approach */
+
 function assignButtonsRead(){
     for(let i = 0; i < readButtons.length; i++){
         readButtons[i].addEventListener('click', (function (e) {
-            myLibrary[i].readOrNot = 'not read';
-            console.log(e.target.parentElement.childNodes[5].dataset.indexNumber);
+            myLibrary[e.target.parentElement.childNodes[6].dataset.indexNumber].readOrNot = 'not read';
+            console.log(e.target.parentElement.childNodes[6].dataset.indexNumber);
             emptyTable();
             fillTable();
         }));   
